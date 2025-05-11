@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.13.35828.75 d17.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BoxHit", "BoxHit\BoxHit.vcxproj", "{3231071D-DE41-4D91-A5AA-AA4B30F78DEC}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HeroQuest", "HeroQuest\HeroQuest.vcxproj", "{3231071D-DE41-4D91-A5AA-AA4B30F78DEC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
