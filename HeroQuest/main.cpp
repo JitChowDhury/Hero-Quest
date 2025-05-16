@@ -6,6 +6,7 @@ int main()
   
     while (window.isOpen())
     {
+        //--------------------------------UPDATE-----------------------------------
         sf::Event event;
         while (window.pollEvent(event))//event will be saved in the var event
         {
@@ -14,9 +15,14 @@ int main()
                 window.close();
             }
         }
-        window.clear(sf::Color::Red);//clears screen from prev
+        //--------------------------------UPDATE-----------------------------------
+
+        //---------------------------------DRAW------------------------------------
+        window.clear(sf::Color::Red);//1.clears screen from prev
+        //2.draw stuff on back buffer
 
         window.display(); //copying the data from back buffer and draw it on screen
+        //---------------------------------DRAW------------------------------------
     }
     return 0;
 } 
