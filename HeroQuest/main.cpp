@@ -7,13 +7,16 @@ int main()
     while (window.isOpen())
     {
         sf::Event event;
-        while (window.pollEvent(event))
+        while (window.pollEvent(event))//event will be saved in the var event
         {
-            if (event.type == sf::Event::Closed)
+            if (event.type == sf::Event::Closed)//checks if the type is close
             {
                 window.close();
             }
-         }
+        }
+        window.clear(sf::Color::Red);//clears screen from prev
+
+        window.display(); //copying the data from back buffer and draw it on screen
     }
     return 0;
 } 
