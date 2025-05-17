@@ -2,9 +2,14 @@
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "SFML works!");//renderwindow class , window is object
+    //--------------------------------INITIALIZE-----------------------------------
+    sf::RenderWindow window(sf::VideoMode(800, 600), "RPG Game");//renderwindow class , window is object
+    sf::CircleShape shape(50.0f);
+    shape.setFillColor(sf::Color::Red);
+    //shape.setPosition()
+    //--------------------------------INITIALIZE-----------------------------------
   
-    while (window.isOpen())
+    while (window.isOpen())//everytime we go through we draw one frame so in o  sec it runs 60 time for 60fps
     {
         //--------------------------------UPDATE-----------------------------------
         sf::Event event;
@@ -18,10 +23,11 @@ int main()
         //--------------------------------UPDATE-----------------------------------
 
         //---------------------------------DRAW------------------------------------
-        window.clear(sf::Color::Red);//1.clears screen from prev
-        //2.draw stuff on back buffer
+        //{CLEAR > DRAW > SWAP BUFFER)
+        window.clear(sf::Color::Black);//1.clears screen from prev 
+        window.draw(shape);//2.draw stuff on back buffer
 
-        window.display(); //copying the data from back buffer and draw it on screen
+        window.display(); //swap the back buffer with front
         //---------------------------------DRAW------------------------------------
     }
     return 0;
