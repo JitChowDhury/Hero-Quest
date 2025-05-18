@@ -6,7 +6,9 @@ int main()
     sf::RenderWindow window(sf::VideoMode(800, 600), "RPG Game");//renderwindow class , window is object
     sf::CircleShape shape(50.0f);
     shape.setFillColor(sf::Color::Red);
-    //shape.setPosition()
+    shape.setPosition(sf::Vector2f(100, 100));
+    shape.setOutlineThickness(10);
+    shape.setOutlineColor(sf::Color::Yellow);
     //--------------------------------INITIALIZE-----------------------------------
   
     while (window.isOpen())//everytime we go through we draw one frame so in o  sec it runs 60 time for 60fps
@@ -15,6 +17,7 @@ int main()
         sf::Event event;
         while (window.pollEvent(event))//event will be saved in the var event
         {
+        
             if (event.type == sf::Event::Closed)//checks if the type is close
             {
                 window.close();
