@@ -22,6 +22,11 @@ int main()
     {
         std::cout << "Player Image Loaded";
         playerSprite.setTexture(playerTexture);
+        //Int
+        int XIndex = 0;
+        int YIndex = 0;
+        playerSprite.setTextureRect(sf::IntRect(XIndex*64, YIndex*64, 64, 64));//(X,Y,Width,Height)
+        playerSprite.scale(sf::Vector2f(3, 3));
     }
     else
     {
