@@ -45,15 +45,37 @@ int main()
             {
                 window.close();
             }
-            if (event.type == sf::Event::KeyPressed)
+            if (event.type == sf::Event::KeyPressed)//it depends on poll rate ( like how often does windows check event queue)
             {
-                if (event.key.code == sf::Keyboard::D)
+                if (event.key.code == sf::Keyboard::F)
                 {
                   sf::Vector2f position=playerSprite.getPosition();
-                  playerSprite.setPosition(position + sf::Vector2f(1, 0));
+                  playerSprite.setPosition(position + sf::Vector2f(10, 0));
 
                 }
             }
+         
+        }
+        sf::Vector2f position = playerSprite.getPosition();
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))//its on update
+        {
+            
+            playerSprite.setPosition(position + sf::Vector2f(1, 0));
+        }
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+        {
+           
+            playerSprite.setPosition(position + sf::Vector2f(-1, 0));
+        }
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+        {
+            
+            playerSprite.setPosition(position + sf::Vector2f(0, -1));
+        }
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+        {
+            
+            playerSprite.setPosition(position + sf::Vector2f(0, 1));
         }
         //--------------------------------UPDATE-----------------------------------
 
