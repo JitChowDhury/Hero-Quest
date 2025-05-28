@@ -45,6 +45,15 @@ int main()
             {
                 window.close();
             }
+            if (event.type == sf::Event::KeyPressed)
+            {
+                if (event.key.code == sf::Keyboard::D)
+                {
+                  sf::Vector2f position=playerSprite.getPosition();
+                  playerSprite.setPosition(position + sf::Vector2f(1, 0));
+
+                }
+            }
         }
         //--------------------------------UPDATE-----------------------------------
 
