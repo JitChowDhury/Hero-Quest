@@ -14,6 +14,8 @@ int main()
 
     
     //--------------------------------INITIALIZE-----------------------------------
+    sf::RectangleShape bullet(sf::Vector2f(25, 12));
+    bullet.setPosition(sf::Vector2f(700, 400));
     //--------------------------------LOAD-----------------------------------
     //--------------------------------ENEMY-----------------------------------
     sf::Texture enemyTexture;
@@ -47,6 +49,7 @@ int main()
         int YIndex = 0;
         playerSprite.setTextureRect(sf::IntRect(XIndex*64, YIndex*64, 64, 64));//(X,Y,Width,Height)//select a part of the spriteSheet
         playerSprite.scale(sf::Vector2f(3, 3));
+        playerSprite.setPosition(sf::Vector2f(750, 400));
     }
     else
     {
@@ -106,6 +109,7 @@ int main()
 
         window.draw(playerSprite);
         window.draw(enemySprite);
+        window.draw(bullet);
         window.display(); //swap the back buffer with front
         //---------------------------------DRAW------------------------------------
     }
