@@ -1,5 +1,19 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include<math.h>
+sf::Vector2f NormalizeVector(sf::Vector2f vector)
+{
+  float magnitude=std::sqrt(vector.x * vector.x + vector.y * vector.y);
+  sf::Vector2f normalizedVector;
+  normalizedVector.x = vector.x / magnitude;
+  normalizedVector.y = vector.y / magnitude;
+
+  return normalizedVector;
+   
+}
+
+
+
 
 int main()
 {
@@ -15,7 +29,8 @@ int main()
     
     //--------------------------------INITIALIZE-----------------------------------
     sf::RectangleShape bullet(sf::Vector2f(25, 12));
-    bullet.setPosition(sf::Vector2f(700, 400));
+    float  bulletSpeed = .05f;
+
     //--------------------------------LOAD-----------------------------------
     //--------------------------------ENEMY-----------------------------------
     sf::Texture enemyTexture;
@@ -58,6 +73,11 @@ int main()
     //--------------------------------PLAYER----------------------------------- 
     //--------------------------------LOAD-----------------------------------
   
+    bullet.setPosition(playerSprite.getPosition());
+    //-------------------------------CALCULATE DIRECTION OF THE BULLET--------------------------
+    sf::Vector2f bulletDirection = (enemySprite.getPosition() - bullet.getPosition());
+    bulletDirection = NormalizeVector(bulletDirection);
+    //-------------------------------CALCULATE DIRECTION OF THE BULLET--------------------------
     while (window.isOpen())//everytime we go through we draw one frame so in o  sec it runs 60 time for 60fps
     {
         //--------------------------------UPDATE-----------------------------------
@@ -80,6 +100,10 @@ int main()
             }
          
         }
+
+        sf::Vector2f bulletPosition = bullet.getPosition();
+        bullet.setPosition(bulletPosition + bulletDirection*bulletSpeed);
+
         sf::Vector2f position = playerSprite.getPosition();
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))//its on update
         {
