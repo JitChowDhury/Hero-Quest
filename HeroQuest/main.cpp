@@ -28,8 +28,10 @@ int main()
 
     
     //--------------------------------INITIALIZE-----------------------------------
-    sf::RectangleShape bullet(sf::Vector2f(25, 12));
+    std::vector<sf::RectangleShape> bullets;
+   
     float  bulletSpeed = .05f;
+    sf::Vector2f bulletDirection;
 
     //--------------------------------LOAD-----------------------------------
     //--------------------------------ENEMY-----------------------------------
@@ -72,12 +74,8 @@ int main()
     }
     //--------------------------------PLAYER----------------------------------- 
     //--------------------------------LOAD-----------------------------------
-  
-    bullet.setPosition(playerSprite.getPosition());
-    //-------------------------------CALCULATE DIRECTION OF THE BULLET--------------------------
-    sf::Vector2f bulletDirection = (enemySprite.getPosition() - bullet.getPosition());
-    bulletDirection = NormalizeVector(bulletDirection);
-    //-------------------------------CALCULATE DIRECTION OF THE BULLET--------------------------
+
+
     while (window.isOpen())//everytime we go through we draw one frame so in o  sec it runs 60 time for 60fps
     {
         //--------------------------------UPDATE-----------------------------------
@@ -101,8 +99,7 @@ int main()
          
         }
 
-        sf::Vector2f bulletPosition = bullet.getPosition();
-        bullet.setPosition(bulletPosition + bulletDirection*bulletSpeed);
+
 
         sf::Vector2f position = playerSprite.getPosition();
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))//its on update
@@ -125,6 +122,24 @@ int main()
             
             playerSprite.setPosition(position + sf::Vector2f(0, 1));
         }
+
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+        {
+            bullets.push_back(sf::RectangleShape(sf::Vector2f(25, 12)));
+            int i = bullets.size() - 1;
+            bullets[i].setPosition(playerSprite.getPosition());
+             
+
+             bulletDirection = (enemySprite.getPosition() - bullets[i].getPosition());
+             bulletDirection = NormalizeVector(bulletDirection);
+        }
+
+
+        for (size_t i = 0; i < bullets.size(); i++)
+        {
+            bullets[i].setPosition(bullets[i].getPosition() + bulletDirection*bulletSpeed);
+        }
+
         //--------------------------------UPDATE-----------------------------------
 
         //---------------------------------DRAW------------------------------------
@@ -133,7 +148,11 @@ int main()
 
         window.draw(playerSprite);
         window.draw(enemySprite);
-        window.draw(bullet);
+
+        for(auto i :bullets)
+        {
+            window.draw(i);
+        }
         window.display(); //swap the back buffer with front
         //---------------------------------DRAW------------------------------------
     }
