@@ -11,9 +11,9 @@ sf::Vector2f NormalizeVector(sf::Vector2f vector)
   return normalizedVector;
    
 }
+                 
 
-
-
+  
 
 int main()
 {
