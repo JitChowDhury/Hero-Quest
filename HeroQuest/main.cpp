@@ -30,8 +30,8 @@ int main()
     //--------------------------------INITIALIZE-----------------------------------
     std::vector<sf::RectangleShape> bullets;
    
-    float  bulletSpeed = .05f;
-    sf::Vector2f bulletDirection;
+    float  bulletSpeed = .1f;
+    
 
     //--------------------------------LOAD-----------------------------------
     //--------------------------------ENEMY-----------------------------------
@@ -48,6 +48,7 @@ int main()
 
         enemySprite.setTextureRect(sf::IntRect(XIndex * 32, YIndex * 32, 32, 32));
         enemySprite.scale(sf::Vector2f(3, 3));
+        enemySprite.setPosition(sf::Vector2f(100, 50));
         
     }
     
@@ -89,12 +90,12 @@ int main()
             }
             if (event.type == sf::Event::KeyPressed)//it depends on poll rate ( like how often does windows check event queue)
             {
-                if (event.key.code == sf::Keyboard::F)
-                {
-                  sf::Vector2f position=playerSprite.getPosition();
-                  playerSprite.setPosition(position + sf::Vector2f(10, 0));
+                //if (event.key.code == sf::Keyboard::F)
+                //{
+                //  sf::Vector2f position=playerSprite.getPosition();
+                //  playerSprite.setPosition(position + sf::Vector2f(10, 0));
 
-                }
+                //}
             }
          
         }
@@ -127,16 +128,18 @@ int main()
         {
             bullets.push_back(sf::RectangleShape(sf::Vector2f(25, 12)));
             int i = bullets.size() - 1;
+            bullets[i].setFillColor(sf::Color::Red);
             bullets[i].setPosition(playerSprite.getPosition());
              
 
-             bulletDirection = (enemySprite.getPosition() - bullets[i].getPosition());
-             bulletDirection = NormalizeVector(bulletDirection);
         }
 
 
         for (size_t i = 0; i < bullets.size(); i++)
         {
+
+            sf::Vector2f bulletDirection = (enemySprite.getPosition() - bullets[i].getPosition());
+            bulletDirection = NormalizeVector(bulletDirection);
             bullets[i].setPosition(bullets[i].getPosition() + bulletDirection*bulletSpeed);
         }
 
