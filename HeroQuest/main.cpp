@@ -2,6 +2,7 @@
 #include <iostream>
 #include<math.h>
 #include "Player.h"
+#include "Enemy.h"
 
 
 sf::Vector2f NormalizeVector(sf::Vector2f vector)
@@ -29,35 +30,14 @@ int main()
     Player player;
     player.Initialize();
     player.Load();
+
+    Enemy enemy;
+    enemy.Initialize();
+    enemy.Load();
     //--------------------------------INITIALIZE-----------------------------------
     std::vector<sf::RectangleShape> bullets;
    
     float  bulletSpeed = .1f;
-    
-
-    //--------------------------------LOAD-----------------------------------
-    //--------------------------------ENEMY-----------------------------------
-    sf::Texture enemyTexture;
-    sf::Sprite enemySprite;
-
-    if (enemyTexture.loadFromFile("Assets/Enemy/Textures/Enemy_Idle.png"))
-    {
-        std::cout << "Enemy texture loaded" << std:: endl;
-        enemySprite.setTexture(enemyTexture);
-
-        int XIndex = 0;
-        int YIndex = 0;
-
-        enemySprite.setTextureRect(sf::IntRect(XIndex * 32, YIndex * 32, 32, 32));
-        enemySprite.scale(sf::Vector2f(3, 3));
-        enemySprite.setPosition(sf::Vector2f(100, 50));
-        
-    }
-    
-    //--------------------------------ENEMY----------------------------------- 
-
-    //--------------------------------LOAD-----------------------------------
-
 
     while (window.isOpen())//everytime we go through we draw one frame so in o  sec it runs 60 time for 60fps
     {
@@ -98,7 +78,7 @@ int main()
         for (size_t i = 0; i < bullets.size(); i++)
         {
 
-            sf::Vector2f bulletDirection = (enemySprite.getPosition() - bullets[i].getPosition());
+            sf::Vector2f bulletDirection = (enemy.sprite.getPosition() - bullets[i].getPosition());
             bulletDirection = NormalizeVector(bulletDirection);
             bullets[i].setPosition(bullets[i].getPosition() + bulletDirection*bulletSpeed);
         }
@@ -109,8 +89,10 @@ int main()
         //{CLEAR > DRAW > SWAP BUFFER)
         window.clear(sf::Color::Black);//1.clears screen from prev 
         player.Draw();
+        enemy.Draw();
+
         window.draw(player.sprite);
-        window.draw(enemySprite);
+        window.draw(enemy.sprite);      
 
         for(auto i :bullets)
         {
