@@ -1,6 +1,9 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include<math.h>
+#include "Player.h"
+
+
 sf::Vector2f NormalizeVector(sf::Vector2f vector)
 {
   float magnitude=std::sqrt(vector.x * vector.x + vector.y * vector.y);
@@ -22,11 +25,10 @@ int main()
     settings.antialiasingLevel = 8;
 
     sf::RenderWindow window(sf::VideoMode(900, 600), "RPG Game",sf::Style::Default,settings);//renderwindow class , window is object
-    //sf::CircleShape shape(50.0f);
-    //shape.setFillColor(sf::Color::Red);
-    //shape.setPosition(sf::Vector2f(100, 100));
 
-    
+    Player player;
+    player.Initialize();
+    player.Load();
     //--------------------------------INITIALIZE-----------------------------------
     std::vector<sf::RectangleShape> bullets;
    
@@ -53,27 +55,7 @@ int main()
     }
     
     //--------------------------------ENEMY----------------------------------- 
-    //--------------------------------PLAYER----------------------------------- 
-    
-    sf::Texture playerTexture;//texture is array of pixels
-    sf::Sprite playerSprite;//spirte holds texture
 
-    if (playerTexture.loadFromFile("Assets/Player/Textures/Sprite_Up.png"))
-    {
-        std::cout << "Player Image Loaded";
-        playerSprite.setTexture(playerTexture);
-        //Int
-        int XIndex = 0;
-        int YIndex = 0;
-        playerSprite.setTextureRect(sf::IntRect(XIndex*64, YIndex*64, 64, 64));//(X,Y,Width,Height)//select a part of the spriteSheet
-        playerSprite.scale(sf::Vector2f(3, 3));
-        playerSprite.setPosition(sf::Vector2f(750, 400));
-    }
-    else
-    {
-        std::cout << "Player Image Failed to Load" << std::endl;
-    }
-    //--------------------------------PLAYER----------------------------------- 
     //--------------------------------LOAD-----------------------------------
 
 
@@ -100,36 +82,14 @@ int main()
          
         }
 
-
-
-        sf::Vector2f position = playerSprite.getPosition();
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))//its on update
-        {
-            
-            playerSprite.setPosition(position + sf::Vector2f(1, 0));
-        }
-        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-        {
-           
-            playerSprite.setPosition(position + sf::Vector2f(-1, 0));
-        }
-        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-        {
-            
-            playerSprite.setPosition(position + sf::Vector2f(0, -1));
-        }
-        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-        {
-            
-            playerSprite.setPosition(position + sf::Vector2f(0, 1));
-        }
+        player.Update();
 
         if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
         {
             bullets.push_back(sf::RectangleShape(sf::Vector2f(25, 12)));
             int i = bullets.size() - 1;
             bullets[i].setFillColor(sf::Color::Red);
-            bullets[i].setPosition(playerSprite.getPosition());
+            bullets[i].setPosition(player.sprite.getPosition());
              
 
         }
@@ -148,8 +108,8 @@ int main()
         //---------------------------------DRAW------------------------------------
         //{CLEAR > DRAW > SWAP BUFFER)
         window.clear(sf::Color::Black);//1.clears screen from prev 
-
-        window.draw(playerSprite);
+        player.Draw();
+        window.draw(player.sprite);
         window.draw(enemySprite);
 
         for(auto i :bullets)
