@@ -11,7 +11,7 @@ public:
 	void Initialize();
 	void Load();
 	void Update();
-	void Draw();
+	void Draw(sf::RenderWindow &window);
 
 };
 
