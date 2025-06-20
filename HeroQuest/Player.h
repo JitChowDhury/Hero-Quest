@@ -8,6 +8,13 @@ private:
 	sf::Texture texture;   //texture is array of pixels
 	std::vector<sf::RectangleShape> bullets;
 	float  bulletSpeed = .1f;
+	sf::RectangleShape boundingRectangle;
+
+	float width = 64;
+	float height = 64;
+
+	sf::Vector2i size;
+
 public:
 	sf::Sprite  sprite;     //spirte holds texture
 

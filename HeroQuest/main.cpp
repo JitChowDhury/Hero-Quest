@@ -53,8 +53,8 @@ int main()
         //---------------------------------DRAW------------------------------------
         //{CLEAR > DRAW > SWAP BUFFER)
         window.clear(sf::Color::Black);//1.clears screen from prev 
-        player.Draw(window);
         enemy.Draw(window);
+        player.Draw(window);
 
         
         

@@ -5,6 +5,11 @@
 
 void Player::Initialize()
 {
+    size = sf::Vector2i(64 , 64);
+    boundingRectangle.setFillColor(sf::Color::Transparent);
+    boundingRectangle.setOutlineColor(sf::Color::Red);
+    boundingRectangle.setOutlineThickness(1);
+     
 }
 
 void Player::Load()
@@ -16,8 +21,12 @@ void Player::Load()
         //Int
         int XIndex = 0;
         int YIndex = 0;
-        sprite.setTextureRect(sf::IntRect(XIndex * 64, YIndex * 64, 64, 64));//(X,Y,Width,Height)//select a part of the spriteSheet
+
         sprite.scale(sf::Vector2f(3, 3));
+        boundingRectangle.setSize(sf::Vector2f(size.x * sprite.getScale().x, size.y * sprite.getScale().y));
+
+        sprite.setTextureRect(sf::IntRect(XIndex * size.x, YIndex * size.y, size.x, size.y));//(X,Y,Width,Height)//select a part of the spriteSheet
+        
         sprite.setPosition(sf::Vector2f(750, 400));
     }
     else
@@ -32,22 +41,22 @@ void Player::Update(Enemy &enemy)
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))//its on update
     {
 
-        sprite.setPosition(position + sf::Vector2f(1, 0));
+        sprite.setPosition(position + sf::Vector2f(.5, 0));
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
     {
 
-        sprite.setPosition(position + sf::Vector2f(-1, 0));
+        sprite.setPosition(position + sf::Vector2f(-.5, 0));
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
     {
 
-        sprite.setPosition(position + sf::Vector2f(0, -1));
+        sprite.setPosition(position + sf::Vector2f(0, -.5));
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
     {
 
-        sprite.setPosition(position + sf::Vector2f(0, 1));
+        sprite.setPosition(position + sf::Vector2f(0, .5));
     }
 
 
@@ -68,11 +77,19 @@ void Player::Update(Enemy &enemy)
         bulletDirection = Math::NormalizeVector(bulletDirection);
         bullets[i].setPosition(bullets[i].getPosition() + bulletDirection * bulletSpeed);
     }
+
+    boundingRectangle.setPosition(sprite.getPosition());
+
+    if (Math::checkRectCollision(sprite.getGlobalBounds(), enemy.sprite.getGlobalBounds()))
+    {
+        std::cout << "COLLISIONNN MFFFF!!" << std::endl;
+    }
 }
 
 void Player::Draw(sf::RenderWindow &window)
 {
     window.draw(sprite);
+    window.draw(boundingRectangle);
 
 
     for (auto i : bullets)
