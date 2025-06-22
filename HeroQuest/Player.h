@@ -7,7 +7,8 @@ class Player
 private:
 	sf::Texture texture;   //texture is array of pixels
 	std::vector<sf::RectangleShape> bullets;
-	float  bulletSpeed = .1f;
+	float  bulletSpeed = .5f;
+	float playerSpeed = 2.0f;
 	sf::RectangleShape boundingRectangle;
 
 	float width = 64;
@@ -21,7 +22,7 @@ public:
 public:
 	void Initialize();           //<- called once per App start
 	void Load();                 //<- called once per App start
-	void Update(Enemy &enemy);               //<- called once per frame
+	void Update(float deltaTime,Enemy &enemy);               //<- called once per frame
 	void Draw(sf::RenderWindow &window);                 //<- called once per frame 
 };
 

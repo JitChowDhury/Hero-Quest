@@ -29,7 +29,7 @@ bool Math::checkRectCollision(sf::FloatRect rect1, sf::FloatRect rect2)
 		rect2.top < rect1.top + rect1.height)
 
 	{
-		return true;
+		return true;    
 	}
 
 

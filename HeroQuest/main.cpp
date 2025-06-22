@@ -1,18 +1,22 @@
 #include <SFML/Graphics.hpp>
+#include<iostream>
 
 #include "Player.h"
 #include "Enemy.h"
+ 
 
 
-              
 
 int main()
+
 {
     //--------------------------------INITIALIZE-----------------------------------
     sf::ContextSettings settings;
     settings.antialiasingLevel = 8;
 
     sf::RenderWindow window(sf::VideoMode(900, 600), "RPG Game",sf::Style::Default,settings);//renderwindow class , window is object
+    window.setVerticalSyncEnabled(true);
+    //window.setFramerateLimit(60);
 
     //--------------------------------INITIALIZE-----------------------------------
     Player player;
@@ -25,11 +29,17 @@ int main()
     player.Load();
     enemy.Load();
     //--------------------------------LOAD-----------------------------------
-
+    sf::Clock clock;
 
 
     while (window.isOpen())//everytime we go through we draw one frame so in o  sec it runs 60 time for 60fps
     {
+        sf::Time deltaTimeTimer = clock.restart();
+
+        float deltaTime = deltaTimeTimer.asMicroseconds();
+        std::cout << "Delta Time: " << deltaTime << std::endl;
+
+
         //--------------------------------UPDATE-----------------------------------
         sf::Event event;
         while (window.pollEvent(event))//event will be saved in the var event
@@ -44,8 +54,8 @@ int main()
             }
         }
 
-        enemy.Update();
-        player.Update(enemy);
+        enemy.Update(deltaTime);
+        player.Update(deltaTime,enemy);
 
 
         //--------------------------------UPDATE-----------------------------------
@@ -61,6 +71,8 @@ int main()
 
         window.display(); //swap the back buffer with front
         //---------------------------------DRAW------------------------------------
+
+        clock.restart();
     }
     return 0;
 } 
