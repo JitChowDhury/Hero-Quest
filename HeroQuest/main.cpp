@@ -15,7 +15,7 @@ int main()
     settings.antialiasingLevel = 8;
 
     sf::RenderWindow window(sf::VideoMode(900, 600), "RPG Game",sf::Style::Default,settings);//renderwindow class , window is object
-    window.setVerticalSyncEnabled(true);
+    window.setVerticalSyncEnabled(true);//enables vsync
     //window.setFramerateLimit(60);
 
     //--------------------------------INITIALIZE-----------------------------------
@@ -34,7 +34,7 @@ int main()
 
     while (window.isOpen())//everytime we go through we draw one frame so in o  sec it runs 60 time for 60fps
     {
-        sf::Time deltaTimeTimer = clock.restart();
+        sf::Time deltaTimeTimer = clock.restart();//gets the time elapesd before restarting the clock;
 
         float deltaTime = deltaTimeTimer.asMicroseconds();
         std::cout << "Delta Time: " << deltaTime << std::endl;
