@@ -18,6 +18,9 @@ int main()
     window.setVerticalSyncEnabled(true);//enables vsync
     //window.setFramerateLimit(60);
 
+
+    sf::Text frameRateText;
+    sf::Font font;
     //--------------------------------INITIALIZE-----------------------------------
     Player player;
     Enemy enemy;
@@ -28,6 +31,17 @@ int main()
     //--------------------------------LOAD-----------------------------------
     player.Load();
     enemy.Load();
+
+    if(font.loadFromFile("Assets/Fonts/Cinzel-Regular.ttf"))
+    {
+        std::cout << "WOOOOOOO LOADED!!!" << std::endl;
+        frameRateText.setFont(font);
+
+    }
+    else
+    {
+        std::cout << "Not loaded" << std::endl;
+    }
     //--------------------------------LOAD-----------------------------------
     sf::Clock clock;
 
@@ -35,9 +49,10 @@ int main()
     while (window.isOpen())//everytime we go through we draw one frame so in o  sec it runs 60 time for 60fps
     {
         sf::Time deltaTimeTimer = clock.restart();//gets the time elapesd before restarting the clock;
-
-        float deltaTime = deltaTimeTimer.asMilliseconds();
-        std::cout << "Delta Time: " << deltaTime << std::endl;
+        double deltaTime = deltaTimeTimer.asMilliseconds();
+        
+        frameRateText.setString("FPS: " + std::to_string(1000.0f / deltaTime)+ " FrameTime: "+std::to_string(deltaTime));
+        std::cout << "FPS: " << int(1000/deltaTime) <<" FrameTime:"<<deltaTime<< std::endl;
 
 
         //--------------------------------UPDATE-----------------------------------
@@ -67,7 +82,7 @@ int main()
         player.Draw(window);
 
         
-        
+        window.draw(frameRateText);
 
         window.display(); //swap the back buffer with front
         //---------------------------------DRAW------------------------------------
