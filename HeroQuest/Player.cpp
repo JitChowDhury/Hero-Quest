@@ -6,7 +6,7 @@
 void Player::Initialize()
 {
     size = sf::Vector2i(64 , 64);
-    boundingRectangle.setFillColor(sf::Color::Transparent);
+    boundingRectangle.setFillColor(sf::Color::Transparent);//rectangle to understand the outline of player sprite
     boundingRectangle.setOutlineColor(sf::Color::Red);
     boundingRectangle.setOutlineThickness(1);
      

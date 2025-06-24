@@ -36,7 +36,7 @@ int main()
     {
         sf::Time deltaTimeTimer = clock.restart();//gets the time elapesd before restarting the clock;
 
-        float deltaTime = deltaTimeTimer.asMicroseconds();
+        float deltaTime = deltaTimeTimer.asMilliseconds();
         std::cout << "Delta Time: " << deltaTime << std::endl;
 
 
@@ -72,7 +72,7 @@ int main()
         window.display(); //swap the back buffer with front
         //---------------------------------DRAW------------------------------------
 
-        clock.restart();
+       
     }
     return 0;
 } 
