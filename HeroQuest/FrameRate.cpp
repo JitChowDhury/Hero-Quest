@@ -1,6 +1,12 @@
 #include "FrameRate.h"
 #include <iostream> 
 
+FrameRate::FrameRate():timer(0)
+{
+                       
+
+}
+
 void FrameRate::Initialize()
 {
 }

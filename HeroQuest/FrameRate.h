@@ -5,7 +5,12 @@ class FrameRate
 private:
     sf::Text frameRateText;
     sf::Font font;
+	float timer;
 public:
+
+	FrameRate();
+
+
 	void Initialize();           //<- called once per App start
 	void Load();                 //<- called once per App start
 	void Update(float deltaTime);               //<- called once per frame
