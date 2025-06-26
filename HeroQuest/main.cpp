@@ -3,6 +3,7 @@
 
 #include "Player.h"
 #include "Enemy.h"
+#include "FrameRate.h"
  
 
 
@@ -15,33 +16,26 @@ int main()
     settings.antialiasingLevel = 8;
 
     sf::RenderWindow window(sf::VideoMode(900, 600), "RPG Game",sf::Style::Default,settings);//renderwindow class , window is object
-    window.setVerticalSyncEnabled(true);//enables vsync
+    //window.setVerticalSyncEnabled(true);//enables vsync
     //window.setFramerateLimit(60);
 
 
-    sf::Text frameRateText;
-    sf::Font font;
     //--------------------------------INITIALIZE-----------------------------------
     Player player;
     Enemy enemy;
+    FrameRate frameRate;
+    
     //--------------------------------INITIALIZE-----------------------------------
     player.Initialize();
     enemy.Initialize();
+    frameRate.Initialize();
     //--------------------------------INITIALIZE-----------------------------------
     //--------------------------------LOAD-----------------------------------
     player.Load();
     enemy.Load();
+    frameRate.Load();
 
-    if(font.loadFromFile("Assets/Fonts/Cinzel-Regular.ttf"))
-    {
-        std::cout << "WOOOOOOO LOADED!!!" << std::endl;
-        frameRateText.setFont(font);
-
-    }
-    else
-    {
-        std::cout << "Not loaded" << std::endl;
-    }
+   
     //--------------------------------LOAD-----------------------------------
     sf::Clock clock;
 
@@ -50,9 +44,8 @@ int main()
     {
         sf::Time deltaTimeTimer = clock.restart();//gets the time elapesd before restarting the clock;
         double deltaTime = deltaTimeTimer.asMilliseconds();
-        
-        frameRateText.setString("FPS: " + std::to_string(1000.0f / deltaTime)+ " FrameTime: "+std::to_string(deltaTime));
-        std::cout << "FPS: " << int(1000/deltaTime) <<" FrameTime:"<<deltaTime<< std::endl;
+
+        //std::cout << "FPS: " << int(1000/deltaTime) <<" FrameTime:"<<deltaTime<< std::endl;
 
 
         //--------------------------------UPDATE-----------------------------------
@@ -64,15 +57,12 @@ int main()
             {
                 window.close();
             }
-            if (event.type == sf::Event::KeyPressed)//it depends on poll rate ( like how often does windows check event queue)
-            {
-            }
+          
         }
+        frameRate.Update(deltaTime);
 
         enemy.Update(deltaTime);
         player.Update(deltaTime,enemy);
-
-
         //--------------------------------UPDATE-----------------------------------
 
         //---------------------------------DRAW------------------------------------
@@ -80,9 +70,9 @@ int main()
         window.clear(sf::Color::Black);//1.clears screen from prev 
         enemy.Draw(window);
         player.Draw(window);
-
+        frameRate.Draw(window); 
         
-        window.draw(frameRateText);
+       
 
         window.display(); //swap the back buffer with front
         //---------------------------------DRAW------------------------------------
