@@ -15,6 +15,9 @@ public:
 	sf::Sprite sprite;
 
 public:
+	Enemy();
+	~Enemy();
+
 	void Initialize();
 	void Load();
 	void Update(float deltaTime);

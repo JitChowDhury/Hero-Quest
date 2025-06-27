@@ -3,8 +3,13 @@
 
 FrameRate::FrameRate():timer(0)
 {
-                       
+    std::cout << "Object is created and value of timer is "<< timer << std::endl;
 
+}
+
+FrameRate::~FrameRate()
+{
+    std::cout << "Object is Destroyed" << std::endl;
 }
 
 void FrameRate::Initialize()
@@ -27,10 +32,15 @@ void FrameRate::Load()
 
 void FrameRate::Update(float deltaTime)
 {
+    timer += deltaTime;
+    if (timer >= 100)
+    {
     float fps = 1000.0f / deltaTime;
-
-    std::string frameRateString = "FPS: " + std::to_string((int)fps) + "   FrameTime:  " + std::to_string(deltaTime);
+    std::string frameRateString = "FPS: " + std::to_string((int)fps) + "   FrameTime:  " + std::to_string((int)deltaTime);
     frameRateText.setString(frameRateString);
+    timer = 0;
+    }
+
 }
 
 void FrameRate::Draw(sf::RenderWindow& window)

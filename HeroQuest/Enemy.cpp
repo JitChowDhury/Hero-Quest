@@ -1,6 +1,14 @@
 #include "Enemy.h"
 #include<iostream>
 
+Enemy::Enemy()
+{
+}
+
+Enemy::~Enemy()
+{
+}
+
 void Enemy::Initialize()
 {
     size = sf::Vector2i(32, 32);

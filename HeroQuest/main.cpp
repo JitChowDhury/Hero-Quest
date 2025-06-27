@@ -17,7 +17,7 @@ int main()
 
     sf::RenderWindow window(sf::VideoMode(900, 600), "RPG Game",sf::Style::Default,settings);//renderwindow class , window is object
     //window.setVerticalSyncEnabled(true);//enables vsync
-    //window.setFramerateLimit(60);
+    window.setFramerateLimit(100);
 
 
     //--------------------------------INITIALIZE-----------------------------------
@@ -38,12 +38,19 @@ int main()
    
     //--------------------------------LOAD-----------------------------------
     sf::Clock clock;
-
+    double deltaTime = 0.0;
+    sf::Time deltaTimeTimer;
 
     while (window.isOpen())//everytime we go through we draw one frame so in o  sec it runs 60 time for 60fps
     {
-        sf::Time deltaTimeTimer = clock.restart();//gets the time elapesd before restarting the clock;
-        double deltaTime = deltaTimeTimer.asMilliseconds();
+       
+        
+        /*
+        
+        1 second = 1000 ms 
+        1ms = 1000 us
+        
+        */
 
         //std::cout << "FPS: " << int(1000/deltaTime) <<" FrameTime:"<<deltaTime<< std::endl;
 
@@ -59,8 +66,10 @@ int main()
             }
           
         }
-        frameRate.Update(deltaTime);
+        clock.restart();
 
+
+        frameRate.Update(deltaTime);
         enemy.Update(deltaTime);
         player.Update(deltaTime,enemy);
         //--------------------------------UPDATE-----------------------------------
@@ -71,12 +80,13 @@ int main()
         enemy.Draw(window);
         player.Draw(window);
         frameRate.Draw(window); 
-        
-       
-
         window.display(); //swap the back buffer with front
-        //---------------------------------DRAW------------------------------------
 
+
+       deltaTime = deltaTimeTimer.asMicroseconds() / 1000.0;
+       deltaTimeTimer = clock.getElapsedTime();//gets the time elapesd before restarting the clock;
+        //---------------------------------DRAW------------------------------------
+       
        
     }
     return 0;

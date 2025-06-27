@@ -3,6 +3,16 @@
 #include "Math.h"
 
 
+Player::Player():bulletSpeed(0.5f) , playerSpeed(1.0f)
+{
+
+}
+
+Player::~Player()
+{
+    std::cout << "LOML PLAYER DED AF XD" << std::endl;
+}
+
 void Player::Initialize()
 {
     size = sf::Vector2i(64 , 64);

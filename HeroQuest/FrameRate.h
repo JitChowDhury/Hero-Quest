@@ -9,7 +9,7 @@ private:
 public:
 
 	FrameRate();
-
+	~FrameRate();
 
 	void Initialize();           //<- called once per App start
 	void Load();                 //<- called once per App start
