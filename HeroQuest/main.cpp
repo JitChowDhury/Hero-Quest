@@ -66,7 +66,7 @@ int main()
             }
           
         }
-        clock.restart();
+        clock.restart();//restart clock =0;
 
 
         frameRate.Update(deltaTime);
@@ -83,7 +83,7 @@ int main()
         window.display(); //swap the back buffer with front
 
 
-       deltaTime = deltaTimeTimer.asMicroseconds() / 1000.0;
+       deltaTime = deltaTimeTimer.asMicroseconds() / 1000.0;//prev frames
        deltaTimeTimer = clock.getElapsedTime();//gets the time elapesd before restarting the clock;
         //---------------------------------DRAW------------------------------------
        
