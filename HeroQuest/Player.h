@@ -11,6 +11,9 @@ private:
 	float playerSpeed;
 	sf::RectangleShape boundingRectangle;
 
+	int maxFireRate;
+	float fireRateTimer;
+
 	float width = 64;
 	float height = 64;
 

@@ -3,7 +3,7 @@
 #include "Math.h"
 
 
-Player::Player():bulletSpeed(0.5f) , playerSpeed(1.0f)
+Player::Player() :bulletSpeed(0.5f), playerSpeed(1.0f), maxFireRate(250), fireRateTimer(0)
 {
 
 }
@@ -69,14 +69,16 @@ void Player::Update(float deltaTime,Enemy &enemy)
         sprite.setPosition(position + sf::Vector2f(0, 1) * playerSpeed * deltaTime);
     }
 
-
-
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+    //----------------------------------------------------------------------------------------------------------------
+    fireRateTimer += deltaTime;
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && fireRateTimer >=maxFireRate)
     {
         bullets.push_back(sf::RectangleShape(sf::Vector2f(25, 12)));
         int i = bullets.size() - 1;
         bullets[i].setFillColor(sf::Color::Red);
         bullets[i].setPosition(sprite.getPosition());
+
+        fireRateTimer = 0;
 
     }
 
@@ -92,8 +94,9 @@ void Player::Update(float deltaTime,Enemy &enemy)
 
     if (Math::checkRectCollision(sprite.getGlobalBounds(), enemy.sprite.getGlobalBounds()))
     {
-        std::cout << "COLLISIONNN MFFFF!!" << std::endl;
+        std::cout << "COLLISIONNN DUMBASS!!" << std::endl;
     }
+    //----------------------------------------------------------------------------------------------------------------z
 }
 
 void Player::Draw(sf::RenderWindow &window)
