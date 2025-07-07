@@ -13,11 +13,11 @@ int main()
 {
     //--------------------------------INITIALIZE-----------------------------------
     sf::ContextSettings settings;
-    settings.antialiasingLevel = 8;
+    settings.antialiasingLevel = 8;//enables antialiasing
 
     sf::RenderWindow window(sf::VideoMode(900, 600), "RPG Game",sf::Style::Default,settings);//renderwindow class , window is object
     //window.setVerticalSyncEnabled(true);//enables vsync
-    window.setFramerateLimit(100);
+    window.setFramerateLimit(100);//Caps frame rate at 100 FPS.
 
 
     //--------------------------------INITIALIZE-----------------------------------

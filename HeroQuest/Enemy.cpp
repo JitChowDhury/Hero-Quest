@@ -22,7 +22,7 @@ void Enemy::Load()
     if (texture.loadFromFile("Assets/Enemy/Textures/Enemy_Idle.png"))
     {
         std::cout << "Enemy texture loaded" << std::endl;
-        sprite.setTexture(texture);
+        sprite.setTexture(texture);//assigns the texture to sprite
 
         int XIndex = 0;
         int YIndex = 0;
