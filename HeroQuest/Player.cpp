@@ -88,14 +88,17 @@ void Player::Update(float deltaTime,Enemy &enemy)
         sf::Vector2f bulletDirection = (enemy.sprite.getPosition() - bullets[i].getPosition());
         bulletDirection = Math::NormalizeVector(bulletDirection);
         bullets[i].setPosition(bullets[i].getPosition() + bulletDirection * bulletSpeed * deltaTime);
+
+
+        if (Math::checkRectCollision(bullets[i].getGlobalBounds(), enemy.sprite.getGlobalBounds()))
+        {
+            std::cout << "COLLISIONNN DUMBASS!! " <<i<< std::endl;
+            bullets.erase(bullets.begin() + i);
+        }
     }
 
     boundingRectangle.setPosition(sprite.getPosition());
 
-    if (Math::checkRectCollision(sprite.getGlobalBounds(), enemy.sprite.getGlobalBounds()))
-    {
-        std::cout << "COLLISIONNN DUMBASS!!" << std::endl;
-    }
     //----------------------------------------------------------------------------------------------------------------z
 }
 
