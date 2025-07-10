@@ -1,7 +1,7 @@
 #include "Enemy.h"
 #include<iostream>
 
-Enemy::Enemy()
+Enemy::Enemy():health(100)
 {
 }
 
@@ -19,6 +19,19 @@ void Enemy::Initialize()
 
 void Enemy::Load()
 {
+    if (font.loadFromFile("Assets/Fonts/arial.ttf"))
+    {
+        std::cout << "WOOOOOOO LOADED!!!" << std::endl;
+        healthText.setFont(font);
+        healthText.setString(std::to_string(health));//health text to health
+        healthText.setFillColor(sf::Color::Green);
+
+    }
+    else
+    {
+        std::cout << "FAILED SUCCESFULLY DUMBASS" << std::endl;
+    }
+
     if (texture.loadFromFile("Assets/Enemy/Textures/Enemy_Idle.png"))
     {
         std::cout << "Enemy texture loaded" << std::endl;
@@ -34,16 +47,27 @@ void Enemy::Load()
 
         sprite.setPosition(sf::Vector2f(100, 50));
 
+
     }
 }
+
 
 void Enemy::Update(float deltaTime)
 {
     boundingRectangle.setPosition(sprite.getPosition());
+    healthText.setPosition(sprite.getPosition() + sf::Vector2f(10, -30));
+    
 }
 
 void Enemy::Draw(sf::RenderWindow& window)
 {
     window.draw(sprite);
     window.draw(boundingRectangle);
+    window.draw(healthText);
+}
+
+void Enemy::changeHP(int HP)
+{
+    health += HP;
+    healthText.setString(std::to_string(health));
 }

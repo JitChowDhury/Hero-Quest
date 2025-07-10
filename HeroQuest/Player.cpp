@@ -3,6 +3,7 @@
 #include "Math.h"
 
 
+
 Player::Player() :bulletSpeed(0.5f), playerSpeed(1.0f), maxFireRate(250), fireRateTimer(0)
 {
 
@@ -92,8 +93,11 @@ void Player::Update(float deltaTime,Enemy &enemy)
 
         if (Math::checkRectCollision(bullets[i].getGlobalBounds(), enemy.sprite.getGlobalBounds()))
         {
-            std::cout << "COLLISIONNN DUMBASS!! " <<i<< std::endl;
+            enemy.changeHP(-10);
+            if (enemy.health <= 0) enemy.sprite.setScale(sf::Vector2f(0,0));
             bullets.erase(bullets.begin() + i);
+            std::cout << "Enemy Health: " << enemy.health<< std::endl;
+            
         }
     }
 

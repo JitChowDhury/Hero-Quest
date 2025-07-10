@@ -10,9 +10,14 @@ private:
 	float width = 64;
 	float height = 64;
 
+	sf::Text healthText;
+	sf::Font font;
+
+
 	sf::Vector2i size;
 public:
 	sf::Sprite sprite;
+	int health;
 
 public:
 	Enemy();
@@ -22,6 +27,7 @@ public:
 	void Load();
 	void Update(float deltaTime);
 	void Draw(sf::RenderWindow &window);
+	void changeHP(int HP);
 
 };
 
